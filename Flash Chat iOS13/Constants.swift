@@ -6,6 +6,8 @@
 //  Copyright © 2020 Angela Yu. All rights reserved.
 //
 
+import Foundation
+
 struct K {
     static let appName = "⚡️FlashChat"
     static let cellIdentifier = "ReusableCell"
