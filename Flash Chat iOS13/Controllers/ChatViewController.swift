@@ -51,9 +51,7 @@ class ChatViewController: UIViewController {
                         self.messageTextfield.text = ""
                     }
                 }
-                
             }
-            
         }
     }
     
