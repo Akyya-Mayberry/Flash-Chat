@@ -20,11 +20,18 @@
                     <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Imi-YN-UbG" userLabel="Message Stack View">
                         <rect key="frame" x="10" y="10" width="324" height="56"/>
                         <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="YouAvatar" translatesAutoresizingMaskIntoConstraints="NO" id="TKp-F4-ie1">
+                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="HCK-1S-fnn"/>
+                                    <constraint firstAttribute="width" constant="40" id="xev-vt-Zoe"/>
+                                </constraints>
+                            </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bpR-k8-JaK">
-                                <rect key="frame" x="0.0" y="0.0" width="264" height="56"/>
+                                <rect key="frame" x="60" y="0.0" width="204" height="56"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Esd-Mr-sLI">
-                                        <rect key="frame" x="19" y="10" width="235" height="36"/>
+                                        <rect key="frame" x="19" y="10" width="175" height="36"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -58,6 +65,7 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="label" destination="Esd-Mr-sLI" id="gVR-zS-tbf"/>
+                <outlet property="leftImageView" destination="TKp-F4-ie1" id="ev8-rh-CtP"/>
                 <outlet property="messageBubble" destination="bpR-k8-JaK" id="O10-wD-bv0"/>
                 <outlet property="rightImageView" destination="Sed-0v-T4T" id="RLk-ca-cwS"/>
             </connections>
@@ -66,6 +74,7 @@
     </objects>
     <resources>
         <image name="MeAvatar" width="36" height="36"/>
+        <image name="YouAvatar" width="36" height="36"/>
         <namedColor name="BrandPurple">
             <color red="0.67500001192092896" green="0.43500000238418579" blue="0.9179999828338623" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
