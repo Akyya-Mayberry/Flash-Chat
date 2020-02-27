@@ -46,6 +46,10 @@ class ChatViewController: UIViewController {
                     print("Error saving message to database: \(e.localizedDescription)")
                 } else {
                     print("Successfully saved message.")
+                    
+                    DispatchQueue.main.async {
+                        self.messageTextfield.text = ""
+                    }
                 }
                 
             }
@@ -69,32 +73,32 @@ class ChatViewController: UIViewController {
         db.collection(K.FStore.collectionName)
             .order(by: K.FStore.dateField)
             .addSnapshotListener { (querySnapshot, error) in
-            
-            self.messages = []
-            
-            if let e = error {
-                print("Error fetching messages: \(e.localizedDescription)")
-            }
-            
-            if let snapshotDocuments = querySnapshot?.documents {
-                for doc in snapshotDocuments {
-                    print(doc.data())
-                    let data = doc.data()
-                    
-                    if let messageSender = data[K.FStore.senderField] as? String, let messageBody = data[K.FStore.bodyField] as? String {
-                        let newMessage = Message(sender: messageSender, body: messageBody)
-                        self.messages.append(newMessage)
+                
+                self.messages = []
+                
+                if let e = error {
+                    print("Error fetching messages: \(e.localizedDescription)")
+                }
+                
+                if let snapshotDocuments = querySnapshot?.documents {
+                    for doc in snapshotDocuments {
+                        print(doc.data())
+                        let data = doc.data()
                         
-                        DispatchQueue.main.async {
-                            self.tableView.reloadData()
+                        if let messageSender = data[K.FStore.senderField] as? String, let messageBody = data[K.FStore.bodyField] as? String {
+                            let newMessage = Message(sender: messageSender, body: messageBody)
+                            self.messages.append(newMessage)
                             
-                            // scroll to latest message
-                            let indexPath = IndexPath(row: self.messages.count - 1, section: 0)
-                            self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
+                            DispatchQueue.main.async {
+                                self.tableView.reloadData()
+                                
+                                // scroll to latest message
+                                let indexPath = IndexPath(row: self.messages.count - 1, section: 0)
+                                self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
+                            }
                         }
                     }
                 }
-            }
         }
     }
     
@@ -110,7 +114,7 @@ extension ChatViewController: UITableViewDataSource {
         let message = messages[indexPath.row]
         
         let cell = tableView.dequeueReusableCell(withIdentifier: K.cellIdentifier, for: indexPath) as! MessageCell
-
+        
         let isSenderCurrentUser = message.sender == Auth.auth().currentUser?.email
         
         // adjust message bubble based on if current user is sender
